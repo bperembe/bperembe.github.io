@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Berry Perembe's analytics, AI and risk governance portfolio." />
+  <meta name="author" content="Berry Perembe" />
+  <title>Berry Perembe | Analytics, AI & Risk Governance</title>
+  <style>
+    :root {
+      --navy: #07152f;
+      --blue: #2f6df6;
+      --cyan: #23c4d8;
+      --paper: #f5f7fb;
+      --ink: #13213c;
+      --muted: #63708a;
+      --line: #dfe5ef;
+      --shadow: 0 20px 50px rgba(7, 21, 47, 0.12);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin: auto; }
+    .section { padding: 96px 0; }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { margin-top: 0; line-height: 1.12; }
+    h1 { font-size: clamp(3rem, 7vw, 6.8rem); letter-spacing: -.065em; }
+    h2 { font-size: clamp(2.2rem, 4vw, 4rem); letter-spacing: -.045em; }
+    h3 { font-size: 1.35rem; }
+    .section-copy { max-width: 760px; color: var(--muted); font-size: 1.08rem; }
+
+    .skip-link {
+      position: absolute; left: -9999px; top: 10px; z-index: 100;
+      padding: 10px 14px; border-radius: 8px; background: white; color: var(--navy);
+    }
+    .skip-link:focus { left: 10px; }
+
+    .nav {
+      position: fixed; top: 0; inset-inline: 0; z-index: 20;
+      background: rgba(7, 21, 47, .84);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner {
+      min-height: 74px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; color: white; font-weight: 800; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 8px 24px rgba(47,109,246,.38);
+    }
+    .nav-links { display: flex; align-items: center; gap: 26px; color: #d8e2f8; font-size: .92rem; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: white; }
+    .nav-cta { padding: 10px 16px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; }
+
+    .hero {
+      min-height: 100vh; display: grid; align-items: center; position: relative;
+      overflow: hidden; color: white; padding: 130px 0 70px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(35,196,216,.28), transparent 28%),
+        radial-gradient(circle at 60% 75%, rgba(47,109,246,.26), transparent 32%),
+        linear-gradient(135deg, #061126 0%, #0a1c3d 60%, #102d56 100%);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+    .hero-grid {
+      position: relative; z-index: 2; display: grid;
+      grid-template-columns: 1.25fr .75fr; gap: 72px; align-items: center;
+    }
+    .hero h1 span {
+      display: block; color: transparent;
+      background: linear-gradient(90deg, #fff, #7ddce8);
+      background-clip: text; -webkit-background-clip: text;
+    }
+    .hero-copy { max-width: 760px; color: #cbd8ef; font-size: clamp(1rem, 1.5vw, 1.25rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 20px; border-radius: 14px; font-weight: 800;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: white; background: var(--blue); box-shadow: 0 14px 30px rgba(47,109,246,.35); }
+    .btn-secondary { color: white; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
+    .hero-card {
+      padding: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: 30px;
+      background: rgba(255,255,255,.08); box-shadow: 0 28px 60px rgba(0,0,0,.28);
+      backdrop-filter: blur(16px);
+    }
+    .avatar {
+      width: 100%; aspect-ratio: 4 / 5; border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .avatar img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: center 18%;
+    }
+    .status { margin-top: 18px; display: flex; gap: 10px; align-items: center; color: #d8e2f8; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #48e08b; box-shadow: 0 0 0 6px rgba(72,224,139,.12); }
+
+    .metrics { margin-top: -42px; position: relative; z-index: 3; }
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .metric { padding: 28px; border-right: 1px solid var(--line); }
+    .metric:last-child { border: 0; }
+    .metric strong { display: block; font-size: 1.45rem; color: var(--navy); }
+    .metric span { color: var(--muted); font-size: .9rem; }
+
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 72px; align-items: start; }
+    .about-panel { padding: 30px; background: var(--navy); color: white; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .about-panel p { color: #c8d5eb; }
+    .values { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+    .value { padding: 18px; border-radius: 18px; background: white; border: 1px solid var(--line); }
+    .value b { display: block; margin-bottom: 6px; }
+    .value span { color: var(--muted); font-size: .92rem; }
+
+    .projects { background: white; }
+    .case-studies { margin-top: 46px; display: grid; gap: 24px; }
+    .case-study {
+      padding: 32px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--paper); box-shadow: 0 12px 30px rgba(7, 21, 47, .07);
+    }
+    .case-study h3 { margin: 0 0 12px; font-size: clamp(1.5rem, 2.5vw, 2.1rem); }
+    .case-study-summary { max-width: 860px; margin: 0; color: var(--muted); }
+    .case-study-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+    .case-study-block { padding: 17px; border-radius: 16px; background: white; border: 1px solid var(--line); }
+    .case-study-block b { display: block; margin-bottom: 7px; color: var(--navy); }
+    .case-study-block span { color: var(--muted); font-size: .9rem; }
+
+    .skill-list { display: flex; gap: 9px; flex-wrap: wrap; }
+    .case-study .skill-list { margin-top: 18px; }
+    .skill { padding: 8px 12px; background: #eef3ff; color: #244a9d; border-radius: 10px; font-size: .88rem; font-weight: 700; }
+    .skills-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: start; }
+    .skill-groups { display: grid; gap: 18px; }
+    .skill-group { padding: 24px; background: white; border: 1px solid var(--line); border-radius: 20px; }
+    .timeline { border-left: 2px solid #d8e0ec; padding-left: 28px; }
+    .timeline-item { position: relative; margin-bottom: 30px; }
+    .timeline-item::before {
+      content: ""; position: absolute; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--blue); left: -36px; top: 5px; box-shadow: 0 0 0 6px #e9efff;
+    }
+    .timeline-item p { margin-bottom: 0; color: var(--muted); }
+
+    .contact-card {
+      padding: 56px; border-radius: 32px; color: white;
+      background: linear-gradient(135deg, var(--navy), #163b74);
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 30px; align-items: center;
+      box-shadow: var(--shadow);
+    }
+    .contact-actions { display: grid; gap: 12px; }
+    .contact-actions a {
+      padding: 15px 18px; border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px; background: rgba(255,255,255,.07); font-weight: 700;
+    }
+    .contact-actions a:hover { background: rgba(255,255,255,.12); }
+    footer { padding: 32px 0; color: var(--muted); font-size: .9rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-grid, .about-grid, .skills-grid, .contact-card { grid-template-columns: 1fr; }
+      .hero-card { max-width: 520px; }
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .case-study-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .section { padding: 70px 0; }
+      .values, .metric-grid, .case-study-grid { grid-template-columns: 1fr; }
+      .metric { border-right: 0; border-bottom: 1px solid var(--line); }
+      .case-study { padding: 23px; }
+      .contact-card { padding: 30px; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Berry Perembe home">
+        <span class="brand-mark">BP</span>
+        <span>Berry Perembe</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Expertise</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow" style="color:#7ddce8">Analytics leadership · AI strategy · Risk governance</p>
+          <h1>Data into decisions. <span>Strategy into impact.</span></h1>
+          <p class="hero-copy">I lead analytics capabilities that connect trusted data, executive decision-making, responsible AI and measurable business outcomes across Financial Services.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore my work →</a>
+            <a class="btn btn-secondary" href="assets/Berry_Perembe_CV_2026_updated.pdf" download>Download CV</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Profile summary">
+          <div class="avatar">
+            <img src="images/Berry.jpg" alt="Portrait of Berry Perembe" width="949" height="1200" />
+          </div>
+          <div class="status"><span class="status-dot" aria-hidden="true"></span><span>Open to senior Analytics and AI leadership opportunities</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Portfolio focus areas">
+      <div class="container metric-grid">
+        <div class="metric"><strong>Analytics</strong><span>Decision intelligence</span></div>
+        <div class="metric"><strong>AI</strong><span>Responsible adoption</span></div>
+        <div class="metric"><strong>Risk</strong><span>Governance and controls</span></div>
+        <div class="metric"><strong>Leadership</strong><span>Strategy and teams</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-panel">
+          <p class="eyebrow" style="color:#7ddce8">Profile</p>
+          <h2>Purpose-led analytics leadership.</h2>
+          <p>I operate at the intersection of data strategy, AI, business performance and risk. My work translates complex data challenges into clear priorities, scalable capabilities and executive-ready decisions.</p>
+        </div>
+        <div>
+          <p class="eyebrow">What I bring</p>
+          <h2>Technical depth with commercial judgement.</h2>
+          <p class="section-copy">My portfolio combines hands-on analytical expertise with enterprise leadership across Financial Services, data platforms, fraud analytics, customer intelligence and governance.</p>
+          <div class="values">
+            <div class="value"><b>Executive communication</b><span>Clear narratives, investment cases and decision material.</span></div>
+            <div class="value"><b>Trusted data</b><span>Governance, controls, evidence trails and accountable delivery.</span></div>
+            <div class="value"><b>Scalable capability</b><span>Teams, operating models, roadmaps and modern platforms.</span></div>
+            <div class="value"><b>Business outcomes</b><span>Insight translated into action, value and managed risk.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section projects" id="projects">
+      <div class="container">
+        <p class="eyebrow">Selected work</p>
+        <h2>Analytics leadership in action.</h2>
+        <p class="section-copy">Selected examples of how I connect strategy, technology, governance and business value. Project details are anonymised for confidentiality.</p>
+
+        <div class="case-studies">
+          <article class="case-study">
+            <h3>Enterprise Analytics Strategy Transformation</h3>
+            <p class="case-study-summary">Created a scalable analytics roadmap to support Financial Services growth, strengthen executive decision-making and prepare the organisation for responsible AI adoption.</p>
+            <div class="case-study-grid">
+              <div class="case-study-block"><b>Challenge</b><span>Growing demand placed pressure on analytics capacity, reporting and platform readiness.</span></div>
+              <div class="case-study-block"><b>My role</b><span>Led the strategy, operating model, capability plan and executive investment narrative.</span></div>
+              <div class="case-study-block"><b>Approach</b><span>Assessed maturity and aligned people, platforms, governance and AI opportunities.</span></div>
+              <div class="case-study-block"><b>Outcome</b><span>Established a prioritised roadmap and positioned analytics as a strategic business capability.</span></div>
+            </div>
+            <div class="skill-list"><span class="skill">Analytics strategy</span><span class="skill">Operating model</span><span class="skill">AI roadmap</span><span class="skill">Executive reporting</span></div>
+          </article>
+
+          <article class="case-study">
+            <h3>Fraud Analytics &amp; Risk Governance</h3>
+            <p class="case-study-summary">Developed analytical and governance frameworks to identify suspicious behaviour, support investigations and improve risk oversight.</p>
+            <div class="case-study-grid">
+              <div class="case-study-block"><b>Challenge</b><span>Complex fraud patterns required stronger detection, evidence management and stakeholder visibility.</span></div>
+              <div class="case-study-block"><b>My role</b><span>Led analytical investigations and strengthened supporting governance artefacts.</span></div>
+              <div class="case-study-block"><b>Approach</b><span>Applied behavioural analysis, risk segmentation, typologies and structured evidence registers.</span></div>
+              <div class="case-study-block"><b>Outcome</b><span>Improved investigative insight, audit readiness and visibility of emerging risk.</span></div>
+            </div>
+            <div class="skill-list"><span class="skill">Fraud analytics</span><span class="skill">AML/KYC</span><span class="skill">SQL</span><span class="skill">Python</span><span class="skill">Risk governance</span></div>
+          </article>
+
+          <article class="case-study">
+            <h3>Customer Intelligence &amp; Behavioural Segmentation</h3>
+            <p class="case-study-summary">Designed segmentation approaches that translated transactional and engagement data into customer, commercial and risk insights.</p>
+            <div class="case-study-grid">
+              <div class="case-study-block"><b>Challenge</b><span>Stakeholders needed a clearer view of customer activity, lifecycle stage and changing behaviour.</span></div>
+              <div class="case-study-block"><b>My role</b><span>Led segmentation design, analytical logic and business interpretation.</span></div>
+              <div class="case-study-block"><b>Approach</b><span>Combined transaction history, product usage and engagement signals into reusable segments.</span></div>
+              <div class="case-study-block"><b>Outcome</b><span>Enabled more targeted decisions and clearer identification of opportunity and risk.</span></div>
+            </div>
+            <div class="skill-list"><span class="skill">Segmentation</span><span class="skill">Customer analytics</span><span class="skill">Python</span><span class="skill">SQL</span><span class="skill">Tableau</span></div>
+          </article>
+
+          <article class="case-study">
+            <h3>Data Platform Modernisation</h3>
+            <p class="case-study-summary">Helped shape a modern analytics foundation focused on trusted data, reliable delivery, self-service insight and future AI use cases.</p>
+            <div class="case-study-grid">
+              <div class="case-study-block"><b>Challenge</b><span>Fragmented data and manual processes constrained reporting and advanced analytics.</span></div>
+              <div class="case-study-block"><b>My role</b><span>Aligned analytics, engineering, technology and business requirements.</span></div>
+              <div class="case-study-block"><b>Approach</b><span>Prioritised data access, quality controls, cloud readiness and scalable reporting.</span></div>
+              <div class="case-study-block"><b>Outcome</b><span>Strengthened the foundation for trusted reporting, advanced analytics and AI.</span></div>
+            </div>
+            <div class="skill-list"><span class="skill">Snowflake</span><span class="skill">AWS</span><span class="skill">Data governance</span><span class="skill">Tableau</span><span class="skill">Power BI</span></div>
+          </article>
+
+          <article class="case-study">
+            <h3>AI &amp; Advanced Analytics Leadership</h3>
+            <p class="case-study-summary">Established a business-led approach to AI that balanced innovation, governance, practical delivery and measurable value.</p>
+            <div class="case-study-grid">
+              <div class="case-study-block"><b>Challenge</b><span>AI opportunities needed prioritisation against business value, data readiness and risk.</span></div>
+              <div class="case-study-block"><b>My role</b><span>Championed use-case identification and responsible adoption principles.</span></div>
+              <div class="case-study-block"><b>Approach</b><span>Evaluated predictive analytics, automation, generative AI and risk-monitoring opportunities.</span></div>
+              <div class="case-study-block"><b>Outcome</b><span>Positioned AI as a governed strategic capability rather than an isolated experiment.</span></div>
+            </div>
+            <div class="skill-list"><span class="skill">Generative AI</span><span class="skill">Machine learning</span><span class="skill">Responsible AI</span><span class="skill">Python</span><span class="skill">Data strategy</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container skills-grid">
+        <div>
+          <p class="eyebrow">Expertise</p>
+          <h2>A balanced leadership and technology toolkit.</h2>
+          <p class="section-copy">Designed for Head of Analytics, Head of AI, Data Strategy and Risk Governance opportunities.</p>
+          <div class="skill-groups">
+            <div class="skill-group"><h3>Leadership &amp; Strategy</h3><div class="skill-list"><span class="skill">Analytics strategy</span><span class="skill">AI adoption</span><span class="skill">Executive reporting</span><span class="skill">Team design</span><span class="skill">Investment cases</span></div></div>
+            <div class="skill-group"><h3>Data &amp; Technology</h3><div class="skill-list"><span class="skill">SQL</span><span class="skill">Python</span><span class="skill">Snowflake</span><span class="skill">AWS Athena</span><span class="skill">Tableau</span><span class="skill">Power BI</span></div></div>
+            <div class="skill-group"><h3>Risk &amp; Governance</h3><div class="skill-list"><span class="skill">Fraud analytics</span><span class="skill">AML/KYC</span><span class="skill">Data governance</span><span class="skill">Audit evidence</span><span class="skill">Privacy controls</span></div></div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">Career narrative</p>
+          <div class="timeline">
+            <div class="timeline-item"><h3>Head of Data Analytics</h3><p>Lead analytics strategy, delivery, governance and stakeholder alignment across Financial Services.</p></div>
+            <div class="timeline-item"><h3>Analytics &amp; Data Science Leadership</h3><p>Build teams, delivery roadmaps, analytical products and modern reporting capabilities.</p></div>
+            <div class="timeline-item"><h3>Technical Analytics Foundation</h3><p>Use SQL, Python, cloud data platforms and visualisation to turn data into actionable insight.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-card">
+        <div>
+          <p class="eyebrow" style="color:#7ddce8">Let's connect</p>
+          <h2>Building trusted analytics and responsible AI.</h2>
+          <p style="color:#cbd8ef">For leadership opportunities, advisory conversations and professional collaboration.</p>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:your-email@example.com">Email me →</a>
+          <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noreferrer">LinkedIn profile →</a>
+          <a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub profile →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Berry Perembe. All rights reserved.</span>
+      <span>Analytics · AI · Risk Governance</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
